@@ -25,7 +25,7 @@ The toy program is implemented in these files:
 * list.h
 * list.c
 
-The toy progam is worht reviewing as it demonstrates the full capabilities of the self-test framework.
+**Please review the entire toy program as it demonstrates the full capabilities of this framework.**
 
 ## Usage
 
@@ -33,18 +33,18 @@ Include the self-test files in the build process for your application.
 
 **IMPORTANT: Under Linux, the linux_selftest.o object file must be the first file passed to the linker or the self-test framework will not work.**
 
-Include a call to `self_test_run()` in your main program, preferably before any real work is done by the application.  If the `self_test_run()` function returns zero, at least one self-test failed and you should probably exit the program immediately.
+Include a call to `self_test_run()` in your main program, preferably before any real work is done by the application.  If the `self_test_run()` function returns zero, at least one self-test failed and you should exit the program immediately to avoid running the program in a potentially corrupted environment.
 
 ## Implementing a Self-Test
 
-Self-tests are written directy into the translation unit of the module or subsystem being tested.  This helps to keep the code and test synchronized over time.
+Self-tests are written directly into the translation unit of the module or subsystem being tested.  This helps to keep the code and the tests synchronized over time.
 
 The following platform-dependent macros have been defined:
 
-* `SELF_TEST(n,l)` - Implement a self-test for module `n` at testing level `l`.
+* `SELF_TEST(n,l)` - Implement a self-test for module `n` at testing level `l`
 * `SELF_TEST_ASSERT(x)` - Assert that expression `x` is true, otherwise report an error and jump to the label `failure`
-* `SELF_TEST_FUNC` - Function decoration needed to install function that support testing into the self-test section
-* `SELF_TEST_RO` - Variable decoration needed to install the read-only variable into the read-only self-test section 
+* `SELF_TEST_FUNC` - Function decoration needed to install testsupport functions into the self-test section
+* `SELF_TEST_RO` - Variable decoration needed to install test read-only variables into the read-only self-test section 
 
 Here is an example for setting up and running a basic self-test.
     
